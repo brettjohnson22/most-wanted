@@ -30,10 +30,13 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
+  person = person[0]; //ADDED to change array into object 
+
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
+    alert("Gender: " + person.gender + "\nDOB: " + person.dob + "\nHeight: " + person.height + "\nWeight: " + person.weight + "\nEye Color: " + person.eyeColor + "\nOccupation: " + person.occupation);
     // TODO: get person's info
     break;
     case "family":
@@ -64,7 +67,7 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+// TODO: find the person using the name they entered
   return foundPerson;
 }
 
