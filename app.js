@@ -12,6 +12,8 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
+    var foundPerson = searchByTrait(people);
+    mainMenu(foundPerson, people);
       // TODO: search by traits
       break;
       default:
@@ -71,21 +73,20 @@ function searchByName(people){
 }
 
 function searchByTrait(people){
-  var eyeColor = promptFor("what is the person's eyecolor?");
-  var height = promptFor("What is the person's height?");
-  var weight = promptFor("what is the person's weight?"); 
-  var occupation = promptFor("what is the person's occupation");  
-  var gender = promptFor("what is the person's gender?"); 
+  var eyeColor = promptFor("what is the person's eyecolor?", chars);
+  var height = promptFor("What is the person's height?", chars);
+  var weight = promptFor("What is the person's weight?", chars); 
+  var occupation = promptFor("What is the person's occupation?", chars);  
+  var gender = promptFor("What is the person's gender?", chars); 
 
   var foundPerson = people.filter(function(person){
-    if(person.eyeColor === eyeColor && person.height === height && person.weight == weight && person.occupation == occupation && person.gender == gender){
+    if(person.eyeColor === eyeColor && person.height.toString() === height && person.weight.toString() === weight && person.occupation === occupation && person.gender === gender){
       return true;
     }
     else{
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson[0];
 }
 
@@ -124,7 +125,8 @@ function displayFamily(person, people){
   var personFamily = person.firstName + " " + person.lastName + "'s Family:\nSpouse: " + grabFullNames(findSpouse(person, people)) + "\n";
   personFamily += "Children: " + grabFullNames(findChildren(person, people)) + "\n";
   personFamily += "Parents: " + grabFullNames(findParents(person, people)) + "\n";
-  personFamily += "Siblings " + grabFullNames(findSiblings(person, people)) + "\n";
+  personFamily += "Siblings: " + grabFullNames(findSiblings(person, people)) + "\n";
+  personFamily += "Grandchildren: " + grabFullNames(findGrandchildren(person, people));
   alert(personFamily);
 }
 
@@ -145,6 +147,26 @@ function findDescendants(person, people){
       }
   return foundDescendants;
 }
+
+function findGrandchildren(person, people){
+  var foundDescendants = people.filter(function(potentialDescendant){
+    if (potentialDescendant.parents.includes(person.id)){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+    for (let i = 0; i < foundDescendants.length; i++){
+      let potentialGrandChild = findGrandchildren(foundDescendants[i], people);
+      if (potentialGrandChild.length > 0){
+          foundDescendants = [];
+          foundDescendants.push(potentialGrandChild[0]);
+        }
+      }
+  return foundDescendants;
+}
+
 
 function findChildren(person, people){
   var foundChildren = people.filter(function(potentialChild){
