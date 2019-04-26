@@ -70,6 +70,25 @@ function searchByName(people){
   return foundPerson[0];
 }
 
+function searchByTrait(people){
+  var eyeColor = promptFor("what is the person's eyecolor?");
+  var height = promptFor("What is the person's height?");
+  var weight = promptFor("what is the person's weight?"); 
+  var occupation = promptFor("what is the person's occupation");  
+  var gender = promptFor("what is the person's gender?"); 
+
+  var foundPerson = people.filter(function(person){
+    if(person.eyeColor === eyeColor && person.height === height && person.weight == weight && person.occupation == occupation && person.gender == gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // DONE: TODO: find the person using the name they entered
+  return foundPerson[0];
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -203,9 +222,9 @@ function chars(input){
 function getAge(dob){
   let currentDate = new Date();
   let birthDate = new Date(dob);
-  let currentYear = currentDate.getFullYear();
+  //let currentYear = currentDate.getFullYear();
   let age = currentDate.getFullYear() - birthDate.getFullYear();
-  if (currentDate < (new Date(birthDate.setFullYear(currentYear)))){
+  if (currentDate < (new Date(birthDate.setFullYear(currentDate.getFullYear())))){
     age = age - 1
   }
   return age;
