@@ -30,10 +30,12 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
+
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
+    displayPerson(person);
     // TODO: get person's info
     break;
     case "family":
@@ -64,8 +66,8 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
-  return foundPerson;
+  // DONE: TODO: find the person using the name they entered
+  return foundPerson[0];
 }
 
 // alerts a list of people
@@ -80,7 +82,13 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation;
+  // DONE: TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
