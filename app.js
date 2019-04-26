@@ -53,8 +53,8 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
+  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
 
   var foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -82,6 +82,7 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Age: " + getAge(person.dob) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
@@ -107,3 +108,15 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+
+
+
+// function getAge(dob){
+//   let currentDate = new Date()
+//   let birthDate = new Date(dob)
+//   let currentYear = currentDate.getFullYear()
+//   let birthYear = birthDate.getFullYear()
+//   let age = currentYear - birthYear
+// }
+
