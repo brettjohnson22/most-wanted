@@ -29,8 +29,6 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
- 
-
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
@@ -39,11 +37,12 @@ function mainMenu(person, people){
     // DONE: TODO: get person's info
     break;
     case "family":
+    displayFamily(person, people);
     // TODO: get person's family
     break;
     case "descendants":
     displayPeople(findChildren(person, people))
-    // TODO: get person's descendants
+    // DONE: TODO: get person's descendants
     break;
     case "restart":
     app(people); // restart
@@ -97,6 +96,14 @@ function displayPeople(people){
   }).join("\n"));
 }
 
+//only works on arrays
+function grabFullNames(people){
+  let peopleToDisplay = people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join(" & ");
+  return peopleToDisplay;
+}
+
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
@@ -104,12 +111,39 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Age: " + getAge(person.dob) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation;
   // DONE: TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function displayFamily(person, people){
+  var personFamily = person.firstName + " " + person.lastName + "'s Family:\nSpouse: " + grabFullNames(findSpouse(person, people)) + "\n";
+  personFamily += "Children: " + grabFullNames(findChildren(person, people)) + "\n";
+  personFamily += "Parents: " + grabFullNames(findParents(person, people)) + "\n";
+  personFamily += "Siblings " + grabFullNames(findSiblings(person, people)) + "\n";
+  alert(personFamily);
+}
+
+function findDescendants(person, people){
+  var foundDescendants = people.filter(function(potentialDescendant){
+    if (potentialDescendant.parents.includes(person.id)){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+    for (let i = 0; i < foundDescendants.length; i++){
+      let potentialGrandChild = findDescendants(foundDescendants[i], people);
+      if (potentialGrandChild.length > 0){
+          foundDescendants.push(potentialGrandChild[0]);
+        }
+      }
+  return foundDescendants;
 }
 
 function findChildren(person, people){
@@ -121,14 +155,46 @@ function findChildren(person, people){
       return false;
       }
   });
-    for (let i = 0; i < foundChildren.length; i++){
-      let potentialGrandChild = findChildren(foundChildren[i], people);
-      if (potentialGrandChild.length > 0){
-          foundChildren.push(potentialGrandChild[0]);
-        }
-      }
   return foundChildren;
 }
+
+function findSiblings(person, people){
+  var foundSiblings = people.filter(function(potentialSibling){
+    if (potentialSibling.parents == person.parents && potentialSibling.id != person.id){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+  return foundSiblings;
+}
+
+function findParents(person, people){
+  var foundParents = people.filter(function(potentialParent){
+    if (person.parents.includes(potentialParent.id)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return foundParents;
+}
+
+function findSpouse(person, people){
+  var foundSpouse = people.filter(function(potentialSpouse){
+    if (potentialSpouse.currentSpouse == person.id){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+  return foundSpouse;
+}
+
+
 
 
 // function that prompts and validates user input
@@ -147,4 +213,18 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+
+
+
+function getAge(dob){
+  let currentDate = new Date();
+  let birthDate = new Date(dob);
+  let currentYear = currentDate.getFullYear();
+  let age = currentDate.getFullYear() - birthDate.getFullYear();
+  if (currentDate < (new Date(birthDate.setFullYear(currentYear)))){
+    age = age - 1
+  }
+  return age;
 }
