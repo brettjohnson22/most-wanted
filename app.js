@@ -43,7 +43,7 @@ function mainMenu(person, people){
     // DONE: TODO: get person's family
     break;
     case "descendants":
-    displayPeople(findChildren(person, people))
+    displayDescendants(person, people);
     // DONE: TODO: get person's descendants
     break;
     case "restart":
@@ -105,6 +105,13 @@ function grabFullNames(people){
   return peopleToDisplay;
 }
 
+function grabFullNamesLineBreaks(people){
+  let peopleToDisplay = people.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n");
+  return peopleToDisplay;
+}
+
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
@@ -128,6 +135,11 @@ function displayFamily(person, people){
   personFamily += "Siblings: " + grabFullNames(findSiblings(person, people)) + "\n";
   personFamily += "Grandchildren: " + grabFullNames(findGrandchildren(person, people));
   alert(personFamily);
+}
+
+function displayDescendants(person, people){
+  var personDescendants = person.firstName + " " + person.lastName + "'s Descendants:\n" + grabFullNamesLineBreaks(findDescendants(person, people));
+  alert (personDescendants);
 }
 
 function findDescendants(person, people){
@@ -166,7 +178,6 @@ function findGrandchildren(person, people){
       }
   return foundDescendants;
 }
-
 
 function findChildren(person, people){
   var foundChildren = people.filter(function(potentialChild){
@@ -216,9 +227,6 @@ function findSpouse(person, people){
   return foundSpouse;
 }
 
-
-
-
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -236,10 +244,6 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-
-
-
-
 
 function getAge(dob){
   let currentDate = new Date();
