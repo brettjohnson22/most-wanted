@@ -12,6 +12,8 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
+    var foundPerson = searchByTrait(people);
+    mainMenu(foundPerson, people);
       // TODO: search by traits
       break;
       default:
@@ -38,7 +40,7 @@ function mainMenu(person, people){
     break;
     case "family":
     displayFamily(person, people);
-    // TODO: get person's family
+    // DONE: TODO: get person's family
     break;
     case "descendants":
     displayPeople(findChildren(person, people))
@@ -58,7 +60,8 @@ function mainMenu(person, people){
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
+  firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
+  lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
   var foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
@@ -91,12 +94,14 @@ function searchByHeight(people){
 
   var foundPerson = people.filter(function(person){
     if(person.height === height){
+
       return true;
     }
     else{
       return false;
     }
   })
+
   // DONE: TODO: find the person using the name they entered
   return foundPerson;
 }
@@ -147,8 +152,6 @@ function searchByGender(people){
   return foundPerson;
 }
 
-}
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -156,7 +159,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-//only works on arrays
+//only works on arrays, not objects. But it does work on an array containing a single object.
 function grabFullNames(people){
   let peopleToDisplay = people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -184,7 +187,8 @@ function displayFamily(person, people){
   var personFamily = person.firstName + " " + person.lastName + "'s Family:\nSpouse: " + grabFullNames(findSpouse(person, people)) + "\n";
   personFamily += "Children: " + grabFullNames(findChildren(person, people)) + "\n";
   personFamily += "Parents: " + grabFullNames(findParents(person, people)) + "\n";
-  personFamily += "Siblings " + grabFullNames(findSiblings(person, people)) + "\n";
+  personFamily += "Siblings: " + grabFullNames(findSiblings(person, people)) + "\n";
+  personFamily += "Grandchildren: " + grabFullNames(findGrandchildren(person, people));
   alert(personFamily);
 }
 
@@ -205,6 +209,26 @@ function findDescendants(person, people){
       }
   return foundDescendants;
 }
+
+function findGrandchildren(person, people){
+  var foundDescendants = people.filter(function(potentialDescendant){
+    if (potentialDescendant.parents.includes(person.id)){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+    for (let i = 0; i < foundDescendants.length; i++){
+      let potentialGrandChild = findGrandchildren(foundDescendants[i], people);
+      if (potentialGrandChild.length > 0){
+          foundDescendants = [];
+          foundDescendants.push(potentialGrandChild[0]);
+        }
+      }
+  return foundDescendants;
+}
+
 
 function findChildren(person, people){
   var foundChildren = people.filter(function(potentialChild){
@@ -275,13 +299,17 @@ function chars(input){
   return true; // default validation only
 }
 
+// function charsName(input){
+//   return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase() == true; // default validation only
+// }
+
+
 
 
 
 function getAge(dob){
   let currentDate = new Date();
   let birthDate = new Date(dob);
-  //let currentYear = currentDate.getFullYear();
   let age = currentDate.getFullYear() - birthDate.getFullYear();
   if (currentDate < (new Date(birthDate.setFullYear(currentDate.getFullYear())))){
     age = age - 1
