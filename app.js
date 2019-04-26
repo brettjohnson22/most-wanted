@@ -1,4 +1,4 @@
-"use strict"
+
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
@@ -34,12 +34,13 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     displayPerson(person);
-    // TODO: get person's info
+    // DONE: TODO: get person's info
     break;
     case "family":
     // TODO: get person's family
     break;
     case "descendants":
+    displayPeople(findChildren(person, people))
     // TODO: get person's descendants
     break;
     case "restart":
@@ -90,6 +91,25 @@ function displayPerson(person){
   // DONE: TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
+
+function findChildren(person, people){
+  var foundChildren = people.filter(function(potentialChild){
+    if (potentialChild.parents.includes(person.id)){
+      return true;
+      }
+      else{
+      return false;
+      }
+  });
+    for (let i = 0; i < foundChildren.length; i++){
+      let potentialGrandChild = findChildren(foundChildren[i], people);
+      if (potentialGrandChild.length > 0){
+          foundChildren.push(potentialGrandChild[0]);
+        }
+      }
+  return foundChildren;
+}
+
 
 // function that prompts and validates user input
 function promptFor(question, valid){
