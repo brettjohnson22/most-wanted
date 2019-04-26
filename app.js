@@ -244,7 +244,6 @@ function chars(input){
 function getAge(dob){
   let currentDate = new Date();
   let birthDate = new Date(dob);
-  //let currentYear = currentDate.getFullYear();
   let age = currentDate.getFullYear() - birthDate.getFullYear();
   if (currentDate < (new Date(birthDate.setFullYear(currentDate.getFullYear())))){
     age = age - 1
