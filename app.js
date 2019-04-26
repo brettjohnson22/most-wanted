@@ -54,8 +54,8 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
-  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
+  var firstName = promptFor("What is the person's first name?", chars);
+  var lastName = promptFor("What is the person's last name?", chars);
 
   var foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -132,11 +132,13 @@ function chars(input){
 
 
 
-// function getAge(dob){
-//   let currentDate = new Date()
-//   let birthDate = new Date(dob)
-//   let currentYear = currentDate.getFullYear()
-//   let birthYear = birthDate.getFullYear()
-//   let age = currentYear - birthYear
-// }
-
+function getAge(dob){
+  let currentDate = new Date();
+  let birthDate = new Date(dob);
+  let currentYear = currentDate.getFullYear();
+  let age = currentDate.getFullYear() - birthDate.getFullYear();
+  if (currentDate < (new Date(birthDate.setFullYear(currentYear)))){
+    age = age - 1
+  }
+  return age;
+}
