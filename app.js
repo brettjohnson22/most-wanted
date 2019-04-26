@@ -38,7 +38,7 @@ function mainMenu(person, people){
     break;
     case "family":
     displayFamily(person, people);
-    // TODO: get person's family
+    // DONE: TODO: get person's family
     break;
     case "descendants":
     displayPeople(findChildren(person, people))
@@ -70,6 +70,25 @@ function searchByName(people){
   return foundPerson[0];
 }
 
+function searchByTrait(people){
+  var eyeColor = promptFor("what is the person's eyecolor?");
+  var height = promptFor("What is the person's height?");
+  var weight = promptFor("what is the person's weight?"); 
+  var occupation = promptFor("what is the person's occupation");  
+  var gender = promptFor("what is the person's gender?"); 
+
+  var foundPerson = people.filter(function(person){
+    if(person.eyeColor === eyeColor && person.height === height && person.weight == weight && person.occupation == occupation && person.gender == gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // DONE: TODO: find the person using the name they entered
+  return foundPerson[0];
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -77,7 +96,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-//only works on arrays
+//only works on arrays, not objects. But it does work on an array containing a single object.
 function grabFullNames(people){
   let peopleToDisplay = people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -195,6 +214,7 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
 
 
 
