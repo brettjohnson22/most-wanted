@@ -29,8 +29,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
-  //person = person[0]; //ADDED to change array into object 
+ 
 
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
@@ -67,7 +66,7 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+  // DONE: TODO: find the person using the name they entered
   return foundPerson[0];
 }
 
@@ -89,7 +88,7 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation;
-  // TODO: finish getting the rest of the information to display
+  // DONE: TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
