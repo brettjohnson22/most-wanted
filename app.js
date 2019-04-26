@@ -29,8 +29,6 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
- 
-
   var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
@@ -94,6 +92,7 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Age: " + getAge(person.dob) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
@@ -195,4 +194,18 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+
+
+
+function getAge(dob){
+  let currentDate = new Date();
+  let birthDate = new Date(dob);
+  let currentYear = currentDate.getFullYear();
+  let age = currentDate.getFullYear() - birthDate.getFullYear();
+  if (currentDate < (new Date(birthDate.setFullYear(currentYear)))){
+    age = age - 1
+  }
+  return age;
 }
