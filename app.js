@@ -38,7 +38,7 @@ function mainMenu(person, people){
     break;
     case "family":
     displayFamily(person, people);
-    // TODO: get person's family
+    // DONE: TODO: get person's family
     break;
     case "descendants":
     displayPeople(findChildren(person, people))
@@ -77,7 +77,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-//only works on arrays
+//only works on arrays, not objects. But it does work on an array containing a single object.
 function grabFullNames(people){
   let peopleToDisplay = people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -195,6 +195,7 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
 
 
 
