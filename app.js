@@ -77,29 +77,29 @@ function searchByTrait(people){
     case "eye color":
     case "eye":
     case "color":
-      searchTrait = "eyeColor"
-      var traitValue = promptFor("What is the person's eye color?", chars);
-      break;
+    searchTrait = "eyeColor"
+    var traitValue = promptFor("What is the person's eye color?", chars);
+    break;
     case "height":
-      var traitValue = promptFor("What is the person's height?", chars);
-      break;
+    var traitValue = promptFor("What is the person's height?", chars);
+    break;
     case "weight":
-      var traitValue = promptFor("What is the person's weight?", chars);
-      break;
+    var traitValue = promptFor("What is the person's weight?", chars);
+    break;
     case "occupation":
     case "job":
-      searchTrait = "occupation"
-      var traitValue = promptFor("What is the person's occupation?", chars);
-      break;
+    searchTrait = "occupation"
+    var traitValue = promptFor("What is the person's occupation?", chars);
+    break;
     case "gender":
     case "sex":
-      searchTrait ="gender"
-      var traitValue = promptFor("What is the person's gender?", chars);
-      break;
+    searchTrait ="gender"
+    var traitValue = promptFor("What is the person's gender?", maleFemale);
+    break;
     case "quit":
       return;
     default:
-      return searchByTrait(people)
+    return searchByTrait(people);
     }
   
   var candidates = people.filter(function(person){
@@ -271,6 +271,10 @@ function promptFor(question, valid){
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
+}
+
+function maleFemale(input){
+  return input.toLowerCase() == "female" || input.toLowerCase() == "male";
 }
 
 // helper function to pass in as default promptFor validation
