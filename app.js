@@ -68,6 +68,7 @@ function searchByTrait(people){
     switch(keepGoing){
       case "yes":
       people = searchByTrait(people);
+      return people;
       break;
       case "no":
       return;
@@ -84,6 +85,7 @@ function searchByTrait(people){
     switch(keepGoing){
       case "yes":
       people = searchByTrait(people);
+      return people;
       break;
       case "no":
       return;
@@ -100,6 +102,7 @@ function searchByTrait(people){
     switch(keepGoing){
       case "yes":
       people = searchByTrait(people);
+      return people;
       break;
       case "no":
       return;
@@ -116,6 +119,7 @@ function searchByTrait(people){
     switch(keepGoing){
       case "yes":
       people = searchByTrait(people);
+      return people;
       break;
       case "no":
       return;
@@ -132,6 +136,7 @@ function searchByTrait(people){
         switch(keepGoing){
         case "yes":
         people = searchByTrait(people);
+        return people;
         break;
         case "no":
         return;
