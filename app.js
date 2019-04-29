@@ -77,29 +77,29 @@ function searchByTrait(people){
     case "eye color":
     case "eye":
     case "color":
-    searchTrait = "eyeColor"
-    var traitValue = prompt("What is the person's eye color?");
-    break;
+      searchTrait = "eyeColor"
+      var traitValue = promptFor("What is the person's eye color?", chars);
+      break;
     case "height":
-    var traitValue = prompt("What is the person's height?");
-    break;
+      var traitValue = promptFor("What is the person's height?", chars);
+      break;
     case "weight":
-    var traitValue = prompt("What is the person's weight?");
-    break;
+      var traitValue = promptFor("What is the person's weight?", chars);
+      break;
     case "occupation":
     case "job":
-    searchTrait = "occupation"
-    var traitValue = prompt("What is the person's occupation?");
-    break;
+      searchTrait = "occupation"
+      var traitValue = promptFor("What is the person's occupation?", chars);
+      break;
     case "gender":
     case "sex":
-    searchTrait ="gender"
-    var traitValue = prompt("What is the person's gender?");
-    break;
+      searchTrait ="gender"
+      var traitValue = promptFor("What is the person's gender?", chars);
+      break;
     case "quit":
-    return;
+      return;
     default:
-    return searchByTrait(people)
+      return searchByTrait(people)
     }
   
   var candidates = people.filter(function(person){
