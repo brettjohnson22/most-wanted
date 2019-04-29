@@ -31,7 +31,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'").toLowerCase();
 
   switch(displayOption){
     case "info":
@@ -155,12 +155,10 @@ function searchByTrait(people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
-  firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-  lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
   var foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+    if(person.firstName.toLowerCase() === firstName && person.lastName.toLowerCase() === lastName){
       return true;
     }
     else{
@@ -171,7 +169,7 @@ function searchByName(people){
 }
 
 function searchByEyeColor(people){
-  var eyeColor = promptFor("What is the person's eye color?", chars);
+  var eyeColor = promptFor("What is the person's eye color?", chars).toLowerCase();
   people = people.filter(function(person){
     if(person.eyeColor == eyeColor){
       return true;
@@ -184,9 +182,9 @@ function searchByEyeColor(people){
 }
 
 function searchByHeight(people){
-  var height = promptFor("What is the person's height?", chars);
+  var height = promptFor("What is the person's height?", chars).toLowerCase();
   people = people.filter(function(person){
-    if(person.height.toString() == height){
+    if(person.height == height){
       return true;
     }
     else{
@@ -197,9 +195,9 @@ function searchByHeight(people){
 }
 
 function searchByWeight(people){
-  var weight = promptFor("What is the person's weight?", chars);
+  var weight = promptFor("What is the person's weight?", chars).toLowerCase();
   people = people.filter(function(person){
-    if(person.weight.toString() == weight){
+    if(person.weight == weight){
       return true;
     }
     else{
@@ -210,7 +208,7 @@ function searchByWeight(people){
 }
 
 function searchByOccupation(people){
-  var occupation = promptFor("What is the person's occupation?", chars);
+  var occupation = promptFor("What is the person's occupation?", chars).toLowerCase();
   people = people.filter(function(person){
     if(person.occupation == occupation){
       return true;
@@ -223,7 +221,7 @@ function searchByOccupation(people){
 }
 
 function searchByGender(people){
-  var gender = promptFor("What is the person's gender?", chars);
+  var gender = promptFor("What is the person's gender?", chars).toLowerCase();
   people = people.filter(function(person){
     if(person.gender == gender){
       return true;
@@ -278,7 +276,7 @@ function displayFamily(person, people){
   personFamily += "Children: " + grabFullNames(findChildren(person, people)) + "\n";
   personFamily += "Parents: " + grabFullNames(findParents(person, people)) + "\n";
   personFamily += "Siblings: " + grabFullNames(findSiblings(person, people)) + "\n";
-  personFamily += "Grandchildren: " + grabFullNames(findGrandchildren(person, people));
+  personFamily += "Grandchildren: " + grabFullNames(findGrandChildren(person, people));
   alert(personFamily);
 }
 
@@ -305,7 +303,7 @@ function findDescendants(person, people){
   return foundDescendants;
 }
 
-function findGrandchildren(person, people){
+function findGrandChildren(person, people){
   var descendants = findDescendants(person, people);
   var grandChildren = descendants.filter(function(el){
     if (el.parents.includes(person.id)){
