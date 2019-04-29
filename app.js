@@ -12,8 +12,8 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
-    var foundPerson = searchByTrait(people);
-    mainMenu(foundPerson, people);
+      var foundPerson = searchByTrait(people);
+      mainMenu(foundPerson, people);
       // TODO: search by traits
       break;
       default:
@@ -54,15 +54,45 @@ function mainMenu(person, people){
     default:
     return mainMenu(person, people); // ask again
   }
-
 }
+function searchByTrait(person, people){
+if(!person){
+    alert("Could not find anyone with that criteria.");
+    return app(people);
+  }
+  var displayOption = prompt("Enter what trait would you like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'");
 
+  switch(displayOption){
+    case "eyecolor":
+    searchByEyeColor(people);
+    break;
+    case "height":
+    searchByHeight(people);
+    break;
+    case "weight":
+    searchByWeight(people);
+    break;
+    case "occupation":
+    searchByOccupation(people);
+    break;
+    case "gender":
+    searchByGender(people);
+    break;
+    case "restart":
+    app(people);
+    break;
+    case "quit":
+    return;
+    default:
+    return searchByTrait(person, people);
+  }
+}
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
@@ -70,7 +100,6 @@ function searchByName(people){
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson[0];
 }
 
