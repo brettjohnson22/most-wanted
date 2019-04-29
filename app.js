@@ -73,6 +73,11 @@ function searchByName(people){
   // DONE: TODO: find the person using the name they entered
   return foundPerson[0];
 }
+
+function searchByTrait(people){
+
+}
+
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
 
@@ -84,9 +89,7 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson;
-
 }
 
 function searchByHeight(people){
@@ -101,8 +104,6 @@ function searchByHeight(people){
       return false;
     }
   })
-
-  // DONE: TODO: find the person using the name they entered
   return foundPerson;
 }
 
@@ -117,7 +118,6 @@ function searchByWeight(people){
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson;
 }
 
@@ -132,10 +132,8 @@ function searchByOccupation(people){
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson;
-
-{
+}
 
 function searchByGender(people){
   var gender = promptFor("What is the person's gender?", chars);
@@ -148,7 +146,6 @@ function searchByGender(people){
       return false;
     }
   })
-  // DONE: TODO: find the person using the name they entered
   return foundPerson;
 }
 
