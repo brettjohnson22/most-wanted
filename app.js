@@ -112,6 +112,7 @@ function searchByTrait(people){
       }
       break;
     case "occupation":
+    case "job":
       people = searchByOccupation(people);
       if (people.length == 1){
         return people[0];
@@ -315,11 +316,10 @@ function findGrandchildren(person, people){
     for (let i = 0; i < foundDescendants.length; i++){
       let potentialGrandChild = findGrandchildren(foundDescendants[i], people);
       if (potentialGrandChild.length > 0){
-          foundDescendants = [];
-          foundDescendants.push(potentialGrandChild[0]);
+          return potentialGrandChild;
         }
       }
-  return foundDescendants;
+      return foundDescendants;
 }
 
 function findChildren(person, people){
@@ -335,12 +335,12 @@ function findChildren(person, people){
 }
 
 function findSiblings(person, people){
-  var foundSiblings = people.filter(function(potentialSibling){
-    if (potentialSibling.parents == person.parents && potentialSibling.id != person.id){
-      return true;
+  var foundSiblings = people.filter(function(el){
+      if ((el.parents.includes(person.parents[0]) || el.parents.includes(person.parents[1])) && el.id != person.id) {
+        return true;
       }
       else{
-      return false;
+        return false;
       }
   });
   return foundSiblings;
