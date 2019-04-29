@@ -55,6 +55,7 @@ function mainMenu(person, people){
       return mainMenu(person, people); // ask again
   }
 }
+
 function searchByTrait(people){
   var displayOption = prompt("Enter what trait you would like to search for: 'eye color', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'quit'").toLowerCase();
   switch(displayOption){
@@ -305,21 +306,16 @@ function findDescendants(person, people){
 }
 
 function findGrandchildren(person, people){
-  var foundDescendants = people.filter(function(potentialDescendant){
-    if (potentialDescendant.parents.includes(person.id)){
-      return true;
-      }
-      else{
+  var descendants = findDescendants(person, people);
+  var grandChildren = descendants.filter(function(el){
+    if (el.parents.includes(person.id)){
       return false;
-      }
-  });
-    for (let i = 0; i < foundDescendants.length; i++){
-      let potentialGrandChild = findGrandchildren(foundDescendants[i], people);
-      if (potentialGrandChild.length > 0){
-          return potentialGrandChild;
-        }
-      }
-      return foundDescendants;
+    }
+    else{
+      return true;
+    }
+  })
+  return grandChildren;
 }
 
 function findChildren(person, people){
@@ -393,7 +389,7 @@ function getAge(dob){
   let birthDate = new Date(dob);
   let age = currentDate.getFullYear() - birthDate.getFullYear();
   if (currentDate < (new Date(birthDate.setFullYear(currentDate.getFullYear())))){
-    age = age - 1
+    age = age - 1;
   }
   return age;
 }
