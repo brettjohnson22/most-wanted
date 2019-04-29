@@ -16,8 +16,8 @@ function app(people){
       mainMenu(foundPerson, people);
       // TODO: search by traits
       break;
-      default:
-    app(people); // restart app
+    default:
+      app(people); // restart app
       break;
   }
 }
@@ -94,7 +94,7 @@ function searchByTrait(people){
           return;
         }
       }
-    break;
+      break;
     case "weight":
       people = searchByWeight(people);
       if (people.length == 1){
@@ -129,7 +129,7 @@ function searchByTrait(people){
             return;
         }
       }
-    break;
+      break;
     case "gender":
       people = searchByGender(people);
         if (people.length == 1){
