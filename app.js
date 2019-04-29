@@ -71,34 +71,36 @@ function searchByName(people){
 
 
 function searchByTrait(people){
-  var searchTrait = prompt("Enter what trait you would like to search for: 'eye color', 'height', 'weight', 'occupation', or 'gender'.\n Type the option you want or 'quit'").toLowerCase();
+  var searchTrait = promptFor("Enter what trait you would like to search for: 'eye color', 'height', 'weight', 'occupation', or 'gender'.\n Type the option you want or 'quit'", chars).toLowerCase();
     switch(searchTrait){
     case "eyecolor":
     case "eye color":
     case "eye":
     case "color":
     searchTrait = "eyeColor"
-    var traitValue = prompt("What is the person's eye color?");
+    var traitValue = promptFor("What is the person's eye color?", chars);
     break;
     case "height":
-    var traitValue = prompt("What is the person's height?");
+    var traitValue = promptFor("What is the person's height?", chars);
     break;
     case "weight":
-    var traitValue = prompt("What is the person's weight?");
+    var traitValue = promptFor("What is the person's weight?", chars);
     break;
     case "occupation":
     case "job":
     searchTrait = "occupation"
-    var traitValue = prompt("What is the person's occupation?");
+    var traitValue = promptFor("What is the person's occupation?", chars);
     break;
     case "gender":
     case "sex":
     searchTrait ="gender"
-    var traitValue = prompt("What is the person's gender?");
+    var traitValue = promptFor("What is the person's gender?", maleFemale);
     break;
     case "quit":
     return;
     break;
+    default:
+    return searchByTrait(people);
     }
   
   var candidates = people.filter(function(person){
@@ -270,6 +272,10 @@ function promptFor(question, valid){
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
+}
+
+function maleFemale(input){
+  return input.toLowerCase() == "female" || input.toLowerCase() == "male";
 }
 
 // helper function to pass in as default promptFor validation
