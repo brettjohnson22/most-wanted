@@ -31,7 +31,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'").toLowerCase();
 
   switch(displayOption){
     case "info":
@@ -56,7 +56,19 @@ function mainMenu(person, people){
   }
 }
 
-
+function searchByName(people){
+  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
+  var foundPerson = people.filter(function(person){
+    if(person.firstName.toLowerCase() === firstName && person.lastName.toLowerCase() === lastName){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  return foundPerson[0];
+}
 
 
 function searchByTrait(people){
@@ -85,12 +97,9 @@ function searchByTrait(people){
     searchTrait ="gender"
     var traitValue = prompt("What is the person's gender?");
     break;
-    // case "last":
-    // case "name":
-    // case "lastname":
-    // case "last name":
-    // var traitValue = prompt("What is the person's last name?");
-    // break;
+    case "quit":
+    return;
+    break;
     }
   
   var candidates = people.filter(function(person){
@@ -117,21 +126,6 @@ function searchByTrait(people){
   }
 }
 
-function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
-  firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-  lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-  var foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-  return foundPerson[0];
-}
 
 // alerts a list of people
 function displayPeople(people){
