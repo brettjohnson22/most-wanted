@@ -15,8 +15,8 @@ function app(people){
       var foundPerson = searchByTrait(people);
       // TODO: search by traits
       break;
-      default:
-    app(people); // restart app
+    default:
+      app(people); // restart app
       break;
   }
 }
@@ -98,7 +98,6 @@ function searchByTrait(people){
     break;
     case "quit":
     return;
-    break;
     default:
     return searchByTrait(people);
     }
