@@ -102,6 +102,11 @@ function searchByName(people){
   })
   return foundPerson[0];
 }
+
+function searchByTrait(people){
+
+}
+
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
 
@@ -114,7 +119,6 @@ function searchByEyeColor(people){
     }
   })
   return foundPerson;
-
 }
 
 function searchByHeight(people){
@@ -158,7 +162,6 @@ function searchByOccupation(people){
     }
   })
   return foundPerson;
-
 }
 
 function searchByGender(people){
