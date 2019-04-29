@@ -101,8 +101,7 @@ function searchByName(people){
 
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
-
-  var people = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.eyeColor === eyeColor){
       return true;
     }
@@ -115,10 +114,8 @@ function searchByEyeColor(people){
 
 function searchByHeight(people){
   var height = promptFor("What is the person's height in inches?", chars);
-
   var people = people.filter(function(person){
     if(person.height === height){
-
       return true;
     }
     else{
@@ -130,9 +127,8 @@ function searchByHeight(people){
 
 function searchByWeight(people){
   var weight = promptFor("What is the person's weight?", chars);
-
-  var people = people.filter(function(person){
-    if(person.weight === weight){
+  people = people.filter(function(person){
+    if(person.weight.toString() === weight){
       return true;
     }
     else{
@@ -144,8 +140,7 @@ function searchByWeight(people){
 
 function searchByOccupation(people){
   var occupation = promptFor("What is the person's occupation?", chars);
-
-  var people = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.occupation === occupation){
       return true;
     }
@@ -158,8 +153,7 @@ function searchByOccupation(people){
 
 function searchByGender(people){
   var gender = promptFor("What is the person's gender?", chars);
-
-  var people = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.gender === gender){
       return true;
     }
