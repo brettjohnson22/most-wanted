@@ -92,7 +92,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
@@ -110,7 +110,7 @@ function searchByTrait(people){
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
 
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.eyeColor === eyeColor){
       return true;
     }
@@ -118,13 +118,13 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByHeight(people){
   var height = promptFor("What is the person's height?", chars);
 
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.height === height){
 
       return true;
@@ -133,13 +133,13 @@ function searchByHeight(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByWeight(people){
   var weight = promptFor("What is the person's weight?", chars);
 
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.weight === weight){
       return true;
     }
@@ -147,13 +147,13 @@ function searchByWeight(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByOccupation(people){
   var occupation = promptFor("What is the person's occupation?", chars);
 
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.occupation === occupation){
       return true;
     }
@@ -161,13 +161,13 @@ function searchByOccupation(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByGender(people){
   var gender = promptFor("What is the person's gender?", chars);
 
-  var foundPerson = people.filter(function(person){
+  var people = people.filter(function(person){
     if(person.gender === gender){
       return true;
     }
@@ -175,7 +175,7 @@ function searchByGender(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 // alerts a list of people
