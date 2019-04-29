@@ -13,7 +13,6 @@ function app(people){
       break;
     case 'no':
       var foundPerson = searchByTrait(people);
-      mainMenu(foundPerson, people);
       // TODO: search by traits
       break;
       default:
@@ -111,7 +110,8 @@ function searchByTrait(people){
     }
   })
   if (candidates.length == 1){
-    return candidates[0];
+    let foundPerson = candidates[0];
+    mainMenu(foundPerson, people);
     }
   else if (candidates.length > 1){
     let keepGoing = promptFor("Search Returned " + candidates.length + " results.\n" + grabFullNamesLineBreaks(candidates) + "\nSearch by another trait? Enter 'yes' or 'no'.", yesNo);
@@ -121,7 +121,8 @@ function searchByTrait(people){
         return candidates;
         break;
       case "no":
-        app(people);
+      return app(people);
+        break;
     }
   }
 }
