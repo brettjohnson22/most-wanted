@@ -75,13 +75,17 @@ function searchByName(people){
 }
 
 function searchByTrait(people){
-
+people = searchByHeight(people);
+if (people.length == 1){
+  return people[0];
+}
+else if (people.length > 1){
+let results = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter height, eyecolor, etc.")
 }
 
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
-
-  var foundPerson = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.eyeColor === eyeColor){
       return true;
     }
@@ -89,42 +93,38 @@ function searchByEyeColor(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByHeight(people){
   var height = promptFor("What is the person's height?", chars);
-
-  var foundPerson = people.filter(function(person){
-    if(person.height === height){
-
+  people = people.filter(function(person){
+    if(person.height.toString() === height){
       return true;
     }
     else{
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByWeight(people){
   var weight = promptFor("What is the person's weight?", chars);
-
-  var foundPerson = people.filter(function(person){
-    if(person.weight === weight){
+  people = people.filter(function(person){
+    if(person.weight.toString() === weight){
       return true;
     }
     else{
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByOccupation(people){
   var occupation = promptFor("What is the person's occupation?", chars);
-
-  var foundPerson = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.occupation === occupation){
       return true;
     }
@@ -132,13 +132,12 @@ function searchByOccupation(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 function searchByGender(people){
   var gender = promptFor("What is the person's gender?", chars);
-
-  var foundPerson = people.filter(function(person){
+  people = people.filter(function(person){
     if(person.gender === gender){
       return true;
     }
@@ -146,7 +145,7 @@ function searchByGender(people){
       return false;
     }
   })
-  return foundPerson;
+  return people;
 }
 
 // alerts a list of people
