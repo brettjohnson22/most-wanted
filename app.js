@@ -56,7 +56,7 @@ function mainMenu(person, people){
   }
 }
 function searchByTrait(people){
-  var displayOption = prompt("Enter what trait would you like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'");
+  var displayOption = prompt("Enter what trait you would like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'").toLowerCase();
   switch(displayOption){
     case "eyecolor":
     people = searchByEyeColor(people);
@@ -162,7 +162,6 @@ function searchByName(people){
   })
   return foundPerson[0];
 }
-
 
 function searchByEyeColor(people){
   var eyeColor = promptFor("What is the person's eyecolor?", chars);
