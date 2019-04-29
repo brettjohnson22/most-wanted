@@ -35,123 +35,126 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(person);
-    // DONE: TODO: get person's info
-    break;
+      displayPerson(person);
+      // DONE: TODO: get person's info
+      break;
     case "family":
-    displayFamily(person, people);
-    // DONE: TODO: get person's family
-    break;
+      displayFamily(person, people);
+      // DONE: TODO: get person's family
+      break;
     case "descendants":
-    displayDescendants(person, people);
-    // DONE: TODO: get person's descendants
-    break;
+      displayDescendants(person, people);
+      // DONE: TODO: get person's descendants
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 function searchByTrait(people){
-  var displayOption = prompt("Enter what trait you would like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'").toLowerCase();
+  var displayOption = prompt("Enter what trait you would like to search for: 'eye color', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'").toLowerCase();
   switch(displayOption){
+    case "eye color":
     case "eyecolor":
-    people = searchByEyeColor(people);
-    if (people.length == 1){
-    return people[0];
-    }
-    else if (people.length > 1){
-    let keepGoing = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.");
-    switch(keepGoing){
-      case "yes":
-      people = searchByTrait(people);
-      return people;
-      break;
-      case "no":
-      return;
-      }
-    }
-    break;
-    case "height":
-    people = searchByHeight(people);
-      if (people.length == 1){
-    return people[0];
-    }
-    else if (people.length > 1){
-    let keepGoing = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.");
-    switch(keepGoing){
-      case "yes":
-      people = searchByTrait(people);
-      return people;
-      break;
-      case "no":
-      return;
-      }
-    }
-    break;
-    case "weight":
-    people = searchByWeight(people);
-    if (people.length == 1){
-    return people[0];
-    }
-    else if (people.length > 1){
-    let keepGoing = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.");
-    switch(keepGoing){
-      case "yes":
-      people = searchByTrait(people);
-      return people;
-      break;
-      case "no":
-      return;
-      }
-    }
-    break;
-    case "occupation":
-    people = searchByOccupation(people);
-        if (people.length == 1){
-    return people[0];
-    }
-    else if (people.length > 1){
-    let keepGoing = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.");
-    switch(keepGoing){
-      case "yes":
-      people = searchByTrait(people);
-      return people;
-      break;
-      case "no":
-      return;
-      }
-    }
-    break;
-    case "gender":
-    people = searchByGender(people);
+    case "eye":
+    case "color":
+      people = searchByEyeColor(people);
       if (people.length == 1){
         return people[0];
       }
       else if (people.length > 1){
-        let keepGoing = prompt("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.");
+        let keepGoing = promptFor("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.", yesNo);
+        switch(keepGoing){
+          case "yes":
+            people = searchByTrait(people);
+            return people;
+            break;
+          case "no":
+            return;
+        }
+      }
+    case "height":
+      people = searchByHeight(people);
+        if (people.length == 1){
+          return people[0];
+        }
+      else if (people.length > 1){
+        let keepGoing = promptFor("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.", yesNo);
         switch(keepGoing){
         case "yes":
-        people = searchByTrait(people);
-        return people;
-        break;
+          people = searchByTrait(people);
+          return people;
+          break;
         case "no":
-        return;
+          return;
         }
-    }
+      }
     break;
+    case "weight":
+      people = searchByWeight(people);
+      if (people.length == 1){
+        return people[0];
+      }
+      else if (people.length > 1){
+        let keepGoing = promptFor("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.", yesNo);
+        switch(keepGoing){
+          case "yes":
+            people = searchByTrait(people);
+            return people;
+            break;
+          case "no":
+            return;
+        }
+      }
+      break;
+    case "occupation":
+      people = searchByOccupation(people);
+      if (people.length == 1){
+        return people[0];
+      }
+      else if (people.length > 1){
+        let keepGoing = promptFor("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.", yesNo);
+        switch(keepGoing){
+          case "yes":
+            people = searchByTrait(people);
+            return people;
+            break;
+          case "no":
+            return;
+        }
+      }
+    break;
+    case "gender":
+      people = searchByGender(people);
+        if (people.length == 1){
+          return people[0];
+        }
+        else if (people.length > 1){
+          let keepGoing = promptFor("Search Returned " + people.length + " results.\n" + grabFullNamesLineBreaks(people) + "\nSearch by another trait? Enter yes or no.", yesNo);
+          switch(keepGoing){
+            case "yes":
+              people = searchByTrait(people);
+              return people;
+              break;
+            case "no":
+              return;
+          }
+        }
+      break;
     case "restart":
-    app(people);
-    break;
+      app(people);
+      break;
     case "quit":
-    return;
+      return;
     default:
-    return searchByTrait(people);
+      return searchByTrait(people);
   }
 }
+
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -169,7 +172,7 @@ function searchByName(people){
 }
 
 function searchByEyeColor(people){
-  var eyeColor = promptFor("What is the person's eyecolor?", chars);
+  var eyeColor = promptFor("What is the person's eye color?", chars);
   people = people.filter(function(person){
     if(person.eyeColor == eyeColor){
       return true;
