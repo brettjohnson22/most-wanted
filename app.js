@@ -55,12 +55,8 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-function searchByTrait(person, people){
-if(!person){
-    alert("Could not find anyone with that criteria.");
-    return app(people);
-  }
-  var displayOption = prompt("Enter what trait would you like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'");
+function searchByTrait(people){
+  var displayOption = prompt("Enter what trait you would like to search for: 'eyecolor', 'height', 'weight', 'occupation', or 'gender'\n Type the option you want or 'restart' or 'quit'").toLowerCase();
 
   switch(displayOption){
     case "eyecolor":
@@ -84,7 +80,7 @@ if(!person){
     case "quit":
     return;
     default:
-    return searchByTrait(person, people);
+    return searchByTrait(people);
   }
 }
 function searchByName(people){
@@ -92,7 +88,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
   firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
   lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
-  var people = people.filter(function(person){
+  var foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
@@ -101,10 +97,6 @@ function searchByName(people){
     }
   })
   return foundPerson[0];
-}
-
-function searchByTrait(people){
-
 }
 
 function searchByEyeColor(people){
@@ -122,7 +114,7 @@ function searchByEyeColor(people){
 }
 
 function searchByHeight(people){
-  var height = promptFor("What is the person's height?", chars);
+  var height = promptFor("What is the person's height in inches?", chars);
 
   var people = people.filter(function(person){
     if(person.height === height){
