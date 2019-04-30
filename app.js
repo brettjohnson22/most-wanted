@@ -126,6 +126,10 @@ function searchByTrait(people){
         mainMenu(foundPerson, people);
         break;
     }
+    }
+  else{
+    alert("Could not find that individual.");
+    return app(people);
   }
 }
 
