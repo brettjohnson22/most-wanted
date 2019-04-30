@@ -81,7 +81,7 @@ function searchByTrait(people){
     var traitValue = promptFor("What is the person's eye color?", chars);
     break;
     case "height":
-    var traitValue = promptFor("What is the person's height?", chars);
+    var traitValue = promptFor("What is the person's height in inches?", chars);
     break;
     case "weight":
     var traitValue = promptFor("What is the person's weight?", chars);
@@ -115,19 +115,19 @@ function searchByTrait(people){
     mainMenu(foundPerson, people);
     }
   else if (candidates.length > 1){
-    let keepGoing = promptFor("Search Returned " + candidates.length + " results.\n" + grabFullNamesLineBreaks(candidates) + "\nSearch by another trait? Enter 'yes' or 'no'.", yesNo);
+    let keepGoing = promptFor("Search Returned " + candidates.length + " results.\n" + grabFullNamesLineBreaks(candidates) + "\n\nSearch by another trait?\n Enter 'yes' to search again or 'no' to search by name.", yesNo);
     switch(keepGoing){
       case "yes":
         candidates = searchByTrait(candidates);
         return candidates;
         break;
       case "no":
-      return app(people);
+        var foundPerson = searchByName(people);
+        mainMenu(foundPerson, people);
         break;
     }
   }
 }
-
 
 // alerts a list of people
 function displayPeople(people){
